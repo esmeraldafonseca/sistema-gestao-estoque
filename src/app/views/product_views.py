@@ -31,8 +31,35 @@ class ProductView:
 
 
     def _register_product(self, event):
-        pass
+        name = self.product_name.value.strip()
+        #força os dados a terem os tipos que precisamos
+        try:    
+            price = float(self.product_price.value.strip())
+            quantity = int(self.product_quantity.value.strip())
+        except:
+            print("Valor invalido, insira apenas numeros nos campos preço e quantidade")
+            return
 
+        if not name:
+            print("Prencha o nome do produto")
+            return
+
+        with get_Connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO produtos 
+                (name, price, quatity) 
+                VALUES (?,?,?)
+                """, (name, price, quantity))
+            
+            conn.commit()
+            print("Produto cadastrado com sucesso!")
+
+            self.product_name.value = ""
+            self.product_price.value = ""
+            self.product_quantity.value = ""
+
+            self.page.update()
     
     def _go_back(self):
         from app.views.home_views import HomeView
