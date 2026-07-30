@@ -1,6 +1,7 @@
 import flet as ft
 from ..models.database import get_Connection
 from passlib.hash import pbkdf2_sha256
+from app.views.home_views import HomeView
 
 class LoginView:
     def __init__(self, page : ft.Page):
@@ -49,6 +50,8 @@ class LoginView:
                 print("Login feito com sucesso!")
 
                 #tela inicial
+                home_view = HomeView(self.page)
+                home_view.build()
 
             else:
                 print("Nome de utilizador ou senha incorreto")
