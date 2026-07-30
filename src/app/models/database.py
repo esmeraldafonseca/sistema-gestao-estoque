@@ -8,12 +8,22 @@ def get_Connection():
 
 def create_table():
     with get_Connection() as conn:
-        cursor = conn.Cursor()
+        cursor = conn.cursor()
+        #tabela usuarios
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS usuarios(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL)
+        """)
+
+        #tabela produtos
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS produtos(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            price TEXT NOT NULL,
+            quatity INTEGER)
         """)
 
         conn.commit()
