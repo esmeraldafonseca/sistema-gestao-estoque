@@ -26,4 +26,13 @@ def create_table():
             quatity INTEGER)
         """)
 
+        #tabela fornecedores
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS fornecedores(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            contact INTEGER NOT NULL,
+            email TEXT NOT NULL UNIQUE)
+        """)
+
         conn.commit()

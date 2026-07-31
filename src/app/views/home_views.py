@@ -53,7 +53,9 @@ class HomeView:
             
         #suppliers
         elif self.page.drawer.selected_index == 2:
-            pass
+            from app.views.supplier_views import SupplierView
+            supplier = SupplierView(self.page)
+            supplier.build()
 
         #stock
         elif self.page.drawer.selected_index == 3:
