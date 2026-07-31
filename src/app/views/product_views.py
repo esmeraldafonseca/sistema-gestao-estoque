@@ -7,6 +7,7 @@ class ProductView:
         self.product_name = ft.TextField(label="Nome do produto")
         self.product_price = ft.TextField(label="Preço do produto")
         self.product_quantity = ft.TextField(label="Quantidade do produto")
+        self.list_product = ft.ListView()
 
         
 
@@ -25,10 +26,15 @@ class ProductView:
                 self.product_quantity,
                 ft.Row([
                     ft.ElevatedButton("Cadastrar produto", on_click= self._register_product)
-                ])
-            ])
+                    ]),
+                ft.Divider(),
+                ft.Text("Produtos cadastrados", size=20),
+                self.list_product
+            ], expand=True, alignment= ft.Alignment.CENTER)
         )
 
+        self.products_list()
+        self.page.update()
 
     def _register_product(self, event):
         name = self.product_name.value.strip()
@@ -65,3 +71,24 @@ class ProductView:
         from app.views.home_views import HomeView
         home = HomeView(self.page)
         home.build()
+
+
+    def products_list(self):
+        self.list_product.controls.clear()
+
+        with get_Connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT name, price, quatity 
+                FROM produtos
+            """)
+            for name, price, quantity in cursor.fetchall():
+                price = float(price)
+                quantity = int(quantity)
+                self.list_product.controls.append(
+                    ft.ListTile(
+                        title=ft.Text(name), 
+                        subtitle= ft.Text(f"Preço: {price:.2f}KZ | Quantidade: {quantity}")
+                    )
+                )
+                self.page.update()
