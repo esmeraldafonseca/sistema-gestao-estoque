@@ -59,7 +59,9 @@ class HomeView:
 
         #stock
         elif self.page.drawer.selected_index == 3:
-            pass       
+            from app.views.stock_views import StockViews
+            stock = StockViews(self.page)
+            stock.build()       
 
         #logout
         elif self.page.drawer.selected_index == 4:
