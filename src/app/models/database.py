@@ -36,3 +36,14 @@ def create_table():
         """)
 
         conn.commit()
+
+#ADICIONA COLUNA DE FORENG KEY A TABLEA PRODUTOS
+def add_fornecedor_column():
+    with get_Connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            ALTER TABLE produtos 
+            ADD COLUMN fornecedor_id INTEGER 
+            REFERENCES fornecedores(id)
+        """)
+        conn.commit()
