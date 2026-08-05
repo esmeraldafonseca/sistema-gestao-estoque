@@ -38,6 +38,7 @@ class ProductView:
 
     def _register_product(self, event):
         name = self.product_name.value.strip()
+
         #força os dados a terem os tipos que precisamos
         try:    
             price = float(self.product_price.value.strip())
@@ -65,6 +66,7 @@ class ProductView:
             self.product_price.value = ""
             self.product_quantity.value = ""
 
+            self.products_list()
             self.page.update()
     
     def _go_back(self):
@@ -92,3 +94,4 @@ class ProductView:
                     )
                 )
                 self.page.update()
+            
