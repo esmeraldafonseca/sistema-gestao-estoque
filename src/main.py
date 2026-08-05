@@ -3,7 +3,7 @@ from app.views.auth_views import LoginView
 from app.models.database import create_table
 
 
-from app.models.database import add_fornecedor_column
+from app.models.database import update_products_suppliers
 
 
 
@@ -16,8 +16,11 @@ def main(page: ft.Page):
     login_views.build()
 
     #FAZ ISSO APENAS UMA VEZ E DEPOIS ELIMINA ESSA LINHA
-    add_fornecedor_column()
-    print("Coluna fornecedor_id adicionada com sucesso!")
+    #add_fornecedor_column()
+    #print("Coluna fornecedor_id adicionada com sucesso!")
+
+    update_products_suppliers()
+
 
 if __name__ == "__main__":
     ft.run(main)

@@ -37,6 +37,24 @@ def create_table():
 
         conn.commit()
 
+
+def update_products_suppliers():
+    product_supplier_pairs = [
+        (1, 3),   # fornecedor_id=1 para o produto id=3
+        (1, 4),   # fornecedor_id=1 para o produto id=4
+        (2, 5),   # fornecedor_id=2 para o produto id=5
+        (2, 6),
+    ]
+
+    with get_Connection() as conn:
+        cursor = conn.cursor()
+        cursor.executemany("""
+            UPDATE produtos
+            SET fornecedor_id = ?
+            WHERE id = ?
+        """, product_supplier_pairs)
+        conn.commit()
+
 #ADICIONA COLUNA DE FORENG KEY A TABLEA PRODUTOS
 def add_fornecedor_column():
     with get_Connection() as conn:
