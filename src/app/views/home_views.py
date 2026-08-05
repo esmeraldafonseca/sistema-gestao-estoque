@@ -43,7 +43,9 @@ class HomeView:
     def _navegate(self, e):
         #dashbord
         if self.page.drawer.selected_index == 0:
-            pass
+            from app.views.dashboard import DashboardViews
+            dashboard = DashboardViews(self.page)
+            dashboard.build()
 
         #product
         elif self.page.drawer.selected_index == 1:
