@@ -67,9 +67,6 @@ uv run flet run
 
 > Nota: requer Python 3.10 ou superior.
 
-## Notas
-
-- O `matplotlib`, usado no dashboard, ainda não está listado no `pyproject.toml`. Até isso ser corrigido, instala-o manualmente com `uv add matplotlib`.
 
 ## Autora
 
